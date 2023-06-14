@@ -21,18 +21,21 @@ def input_graph():
     Returns:
         dict: Представление графа в виде словаря словарей.
     """
-    n = int(input("Введите количество вершин: "))
-    graph = {}
-    m = int(input("Введите количество ребер: "))
-    edges = []
-    for i in range(m):
-        u, v, w = input(f"Введите ребро {i+1} в формате 'u v w': ").split()
-        edges.append((u, v, int(w)))
-    for u, v, w in edges:
-        graph[u] = {}
-        graph[u][v] = w
-        graph[v] = {}
-        graph[v][u] = w
+    try:
+        graph = {}
+        m = int(input("Введите количество ребер: "))
+        edges = []
+        for i in range(m):
+            u, v, w = input(f"Введите ребро {i+1} в формате 'u v w': ").split()
+            edges.append((u, v, int(w)))
+        for u, v, w in edges:
+            graph[u] = {}
+            graph[u][v] = w
+            graph[v] = {}
+            graph[v][u] = w
+        return graph
+    except ValueError:
+        print("Ошибка, связанная с типами данных. Вы неправильно ввели данные, попробуйте снова.")
 
 
 def astar(graph, start, goal):
@@ -106,4 +109,4 @@ def reconstruct_path(came_from, current):
 
 if __name__ == "__main__":
     graph = input_graph()
-    print(astar(graph, "A", "B"))
+    print(astar(graph, "A", "С"))
