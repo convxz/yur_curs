@@ -11,27 +11,29 @@ Date: June 5, 2023
 """
 
 
-def create_graph(vertices, edges=None):
+def input_graph():
     """
     Создает граф в виде словаря словарей.
 
     Args:
-        vertices (list): Список вершин графа.
-        edges (list, optional): Список ребер графа в формате [(вершина1, вершина2, вес), ...]. По умолчанию None.
+        None.
 
     Returns:
         dict: Представление графа в виде словаря словарей.
     """
+    n = int(input("Введите количество вершин: "))
     graph = {}
-    for vertex in vertices:
-        graph[vertex] = {}
-    if edges:
-        for edge in edges:
-            vertex1, vertex2, weight = edge
-            graph[vertex1][vertex2] = weight
-            graph[vertex2][vertex1] = weight
+    m = int(input("Введите количество ребер: "))
+    edges = []
+    for i in range(m):
+        u, v, w = input(f"Введите ребро {i+1} в формате 'u v w': ").split()
+        edges.append((u, v, int(w)))
+    for u, v, w in edges:
+        graph[u] = {}
+        graph[u][v] = w
+        graph[v] = {}
+        graph[v][u] = w
 
-    return graph
 
 def astar(graph, start, goal):
     """
@@ -103,10 +105,5 @@ def reconstruct_path(came_from, current):
 
 
 if __name__ == "__main__":
-    graph = {
-        'A': {'B': 5, 'C': 2},
-        'B': {'A': 5, 'C': 1, 'D': 3},
-        'C': {'A': 2, 'B': 1, 'D': 6},
-        'D': {'B': 3, 'C': 6}
-    }
-    print(astar(graph, "A", "D"))
+    graph = input_graph()
+    print(astar(graph, "A", "B"))
