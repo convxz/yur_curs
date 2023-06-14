@@ -109,4 +109,5 @@ def reconstruct_path(came_from, current):
 
 if __name__ == "__main__":
     graph = input_graph()
-    print(astar(graph, "A", "С"))
+    start, goal = input("Введите начальную вершину(от которой идет поиск): "), input("Введите конечную вершину(к которой идет поиск): ")
+    print(astar(graph, start, goal))
